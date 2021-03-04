@@ -10,13 +10,30 @@
  */
 
 let allWagesFor = function () {
-    let eligibleDates = this.timeInEvents.map(function (e) {
-        return e.date
-    })
+  let eligibleDates = this.timeInEvents.map(function (e) {
+    return e.date;
+  });
 
-    let payable = eligibleDates.reduce(function (memo, d) {
-        return memo + wagesEarnedOnDate.call(this, d)
-    }.bind(this), 0) // <== Hm, why did we need to add bind() there? We'll discuss soon!
+  let payable = eligibleDates.reduce(
+    function (memo, d) {
+      return memo + wagesEarnedOnDate.call(this, d);
+    }.bind(this),
+    0
+  ); // <== Hm, why did we need to add bind() there? We'll discuss soon!
 
-    return payable
-}
+  return payable;
+};
+
+const createEmployeeRecord = (employee) => {
+  return Object.assign(
+    {},
+    {
+      firstName: employee[0],
+      familyName: employee[1],
+      title: employee[2],
+      payPerHour: employee[3],
+      timeInEvents: [],
+      timeOutEvents: [],
+    }
+  );
+};
